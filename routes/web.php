@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +28,9 @@ Route::get('/login', function() { return 'Login';})->name('web.login');
 
 Route::prefix('/app')->group(function() {
   Route::get('/cliente', function() { return 'cliente';})->name('app.client');
-  Route::get('/fonecedores', function() { return 'fonecedores';})->name('app.provider');
+
+  Route::get('/fornecedores', [ProviderController::class, 'index'])->name('app.provider.index');
+
   Route::get('/produtos', function() { return 'produtos';})->name('app.products');
 });
 
