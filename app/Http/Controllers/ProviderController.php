@@ -11,7 +11,7 @@ class ProviderController extends Controller
         0 => [
           'name' => 'Fornecedor 1', 
           'status' => 'n',
-          'cnpj' => '00.000.000./0001'
+          'cnpj' => '0'
         ],
         1 => [
           'name' => 'Fornecedor 2', 

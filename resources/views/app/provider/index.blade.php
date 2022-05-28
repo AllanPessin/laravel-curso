@@ -49,3 +49,20 @@ Status: {{ $provider[0]['status'] }}
     CPNJ: {{ $provider[1]['cnpj'] }}      
   @endisset
 @endisset
+
+<br />
+<br />
+
+{{-- Testa se variável possui valor (retorna true se for vazia) --}}
+@isset($provider)    
+  Fornecedor: {{ $provider[0]['name'] }}
+  <br />
+  Status: {{ $provider[0]['status'] }}
+  <br />
+  @isset($provider[0]['cnpj'])
+    CPNJ: {{ $provider[0]['cnpj'] }}
+    @empty($provider[0]['cnpj'])
+        - Vazio
+    @endempty
+  @endisset
+@endisset
