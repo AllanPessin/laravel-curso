@@ -18,18 +18,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'main']);
 
-Route::get('/contato', [ContactController::class, 'contact'])->name('contact');
-
 Route::get('/sobre-nos', [AboutController::class, 'about'])->name('about');
 
-//nome, categoria, assunto, mensagem
-Route::get('/contato/{nome}/{categoria_id}', 
-  function (
-    string $nome = 'Desconhecido', 
-    int $categoria_id = 1,
-    ) {
-      echo "Estamos aqui: $nome - Motivo do contato: $categoria_id";
-  }
-)
-  ->where('categoria_id', '[0-9]+')->where('nome', '[A-Za-z]+')
-  ->name('contact.message');
+Route::get('/contato', [ContactController::class, 'contact'])->name('contact');
+
+Route::get('/login', function() { return 'Login';})->name('login');
+
+Route::prefix('/app')->group(function() {
+  Route::get('/cliente', function() { return 'cliente';})->name('client');
+  Route::get('/fonecedores', function() { return 'fonecedores';})->name('provider');
+  Route::get('/produtos', function() { return 'produtos';})->name('products');
+});
