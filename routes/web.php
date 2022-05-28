@@ -23,13 +23,13 @@ Route::get('/contato', [ContactController::class, 'contact'])->name('contact');
 Route::get('/sobre-nos', [AboutController::class, 'about'])->name('about');
 
 //nome, categoria, assunto, mensagem
-Route::get('/contato/{nome?}/{categoria?}/{assunto?}/{mensagem?}', 
+Route::get('/contato/{nome}/{categoria_id}', 
   function (
     string $nome = 'Desconhecido', 
-    string $categoria = 'Contato', 
-    string $assunto = 'Assunto teste', 
-    string $mensagem = 'Mensagem nao informada'
+    int $categoria_id = 1,
     ) {
-      echo "Estamos aqui: $nome - Motivo do contato: $categoria - Assunto: $assunto - Menagem: $mensagem";
+      echo "Estamos aqui: $nome - Motivo do contato: $categoria_id";
   }
-)->name('contact.test');
+)
+  ->where('categoria_id', '[0-9]+')->where('nome', '[A-Za-z]+')
+  ->name('contact.message');
