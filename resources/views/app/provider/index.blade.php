@@ -66,3 +66,14 @@ Status: {{ $provider[0]['status'] }}
     @endempty
   @endisset
 @endisset
+
+{{-- Operado ternário sintaxe blade --}}
+@isset($provider)    
+  Fornecedor: {{ $provider[1]['name'] }}
+  <br />
+  Status: {{ $provider[1]['status'] }}
+  <br />
+  CPNJ: {{ $provider[1]['cnpj'] ?? 'Dado não foi preenchido' }} {{-- Se a variável testado não estiver definida 
+                                              ou se a variável possuir o valor null será 
+                                              utilizado o valor default --}}  
+@endisset
