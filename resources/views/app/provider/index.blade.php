@@ -77,3 +77,62 @@ Status: {{ $provider[0]['status'] }}
                                               ou se a variável possuir o valor null será 
                                               utilizado o valor default --}}  
 @endisset
+
+{{-- Sintaxe switch --}}
+@isset($provider)    
+  Fornecedor: {{ $provider[1]['name'] }}
+  <br />
+  Status: {{ $provider[1]['status'] }}
+  <br />
+  CPNJ: {{ $provider[1]['cnpj'] ?? '' }}  
+  <br />
+  Telefone: ({{ $provider[1]['ddd'] ?? '' }}) {{ $provider[1]['telefone'] ?? '' }}  
+  @switch($provider[1]['ddd'])
+      @case('11')
+          São Paulo (SP)
+          @break
+      @case('85')
+          Juiz de Fora (MG)
+          @break
+      @case('32')
+          Fortaleza (CE)
+          @break
+      @default
+         Estado não identificado 
+  @endswitch
+@endisset
+
+{{-- Sintaxe de contador for blade --}}
+@isset($provider)
+  @for ($i = 0; isset($provider[$i]); $i++)
+    Fornecedor: {{ $provider[$i]['name'] }}
+    <br />
+    Status: {{ $provider[$i]['status'] }}
+    <br />
+    CPNJ: {{ $provider[$i]['cnpj'] ?? '' }}  
+    <br />
+    Telefone: ({{ $provider[$i]['ddd'] ?? '' }}) {{ $provider[$i]['telefone'] ?? '' }}  
+    <hr />
+  @endfor
+@endisset
+
+<br />
+<br />
+
+{{-- Sintaxe while blade --}}
+@isset($provider)
+  @php $i = 0 @endphp
+
+  @while(isset($provider[$i]))
+    Fornecedor: {{ $provider[$i]['name'] }}
+    <br />
+    Status: {{ $provider[$i]['status'] }}
+    <br />
+    CPNJ: {{ $provider[$i]['cnpj'] ?? '' }}  
+    <br />
+    Telefone: ({{ $provider[$i]['ddd'] ?? '' }}) {{ $provider[$i]['telefone'] ?? '' }}  
+    <hr />
+    @php $i++ @endphp
+  @endwhile
+@endisset
+    
