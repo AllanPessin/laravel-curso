@@ -26,6 +26,9 @@ Fornecedor: {{ $provider[0]['name'] }}
 <br />
 Status: {{ $provider[0]['status'] }}
 
+<br />
+<br />
+
 {{-- Executa se a condição for true --}}
 @if (!$provider[0]['status'] == 's')
   Fornecedor inativo
@@ -35,3 +38,14 @@ Status: {{ $provider[0]['status'] }}
 @unless ($provider[0]['status'] == 's')
   Fornecedor inativo
 @endunless
+
+{{-- Verifica se variável esta definida ou não --}}
+@isset($provider)    
+  Fornecedor: {{ $provider[1]['name'] }}
+  <br />
+  Status: {{ $provider[1]['status'] }}
+  <br />
+  @isset($provider[1]['cnpj'])
+    CPNJ: {{ $provider[1]['cnpj'] }}      
+  @endisset
+@endisset
