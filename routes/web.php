@@ -3,8 +3,8 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
-use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +43,6 @@ Route::get('/rota2', function() {
 Route::fallback(function() {
   echo 'A rota acessada não existe. <a href="'.route('web.index').'"> Voltar para a pagina inicial<a/>';
 });
+
+
+Route::get('/teste/{p1}/{p2}', [TestController::class, 'test'])->name('test');
