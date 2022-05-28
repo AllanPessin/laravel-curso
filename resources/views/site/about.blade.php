@@ -5,9 +5,9 @@
     <a href="/">Principal</a>
   </li>
   <li>
-    <a href="/sobre-nos">Sobre nós</a>
+    <a href="{{route('web.about')}}">Sobre nós</a>
   </li>
   <li>
-    <a href="/contato">Contao</a>
+    <a href="{{route('web.contact')}}">Contao</a>
   </li>
 </ul>
