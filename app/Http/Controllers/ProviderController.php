@@ -19,6 +19,10 @@ class ProviderController extends Controller
         ],
       ];
       
+      $msg = isset($provider[0]['cnpj']) ? 'CPNJ informado' : 'CPNJ não informado';
+
+      echo $msg;
+
       return view('app.provider.index', compact('provider'));
     }
 }
