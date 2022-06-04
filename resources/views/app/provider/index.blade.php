@@ -10,43 +10,43 @@
 // }
 @endphp
 
-{{-- @dd($provider) --}}
+{{-- @dd($providers) --}}
 
-@if (count($provider) > 0 && count($provider) < 10)
+@if (count($providers) > 0 && count($providers) < 10)
     <h3>Existem alguns fornecedores cadastrados</h3>
 
-    @elseif (count($provider) > 10)
+    @elseif (count($providers) > 10)
         <h3>Existem varios fornecedores cadastrados</h3>
 
     @else
         <h3>Não existem fornecedores cadastrados</h3>
 @endif
 
-Fornecedor: {{ $provider[0]['name'] }}
+Fornecedor: {{ $providers[0]['name'] }}
 <br />
-Status: {{ $provider[0]['status'] }}
+Status: {{ $providers[0]['status'] }}
 
 <br />
 <br />
 
 {{-- Executa se a condição for true --}}
-@if (!$provider[0]['status'] == 's')
+@if (!$providers[0]['status'] == 's')
   Fornecedor inativo
 @endif
 
 {{-- Executa se a condição for false --}}
-@unless ($provider[0]['status'] == 's')
+@unless ($providers[0]['status'] == 's')
   Fornecedor inativo
 @endunless
 
 {{-- Verifica se variável esta definida ou não --}}
-@isset($provider)    
-  Fornecedor: {{ $provider[1]['name'] }}
+@isset($providers)    
+  Fornecedor: {{ $providers[1]['name'] }}
   <br />
-  Status: {{ $provider[1]['status'] }}
+  Status: {{ $providers[1]['status'] }}
   <br />
-  @isset($provider[1]['cnpj'])
-    CPNJ: {{ $provider[1]['cnpj'] }}      
+  @isset($providers[1]['cnpj'])
+    CPNJ: {{ $providers[1]['cnpj'] }}      
   @endisset
 @endisset
 
@@ -54,40 +54,40 @@ Status: {{ $provider[0]['status'] }}
 <br />
 
 {{-- Testa se variável possui valor (retorna true se for vazia) --}}
-@isset($provider)    
-  Fornecedor: {{ $provider[0]['name'] }}
+@isset($providers)    
+  Fornecedor: {{ $providers[0]['name'] }}
   <br />
-  Status: {{ $provider[0]['status'] }}
+  Status: {{ $providers[0]['status'] }}
   <br />
-  @isset($provider[0]['cnpj'])
-    CPNJ: {{ $provider[0]['cnpj'] }}
-    @empty($provider[0]['cnpj'])
+  @isset($providers[0]['cnpj'])
+    CPNJ: {{ $providers[0]['cnpj'] }}
+    @empty($providers[0]['cnpj'])
         - Vazio
     @endempty
   @endisset
 @endisset
 
 {{-- Operado ternário sintaxe blade --}}
-@isset($provider)    
-  Fornecedor: {{ $provider[1]['name'] }}
+@isset($providers)    
+  Fornecedor: {{ $providers[1]['name'] }}
   <br />
-  Status: {{ $provider[1]['status'] }}
+  Status: {{ $providers[1]['status'] }}
   <br />
-  CPNJ: {{ $provider[1]['cnpj'] ?? 'Dado não foi preenchido' }} {{-- Se a variável testado não estiver definida 
+  CPNJ: {{ $providers[1]['cnpj'] ?? 'Dado não foi preenchido' }} {{-- Se a variável testado não estiver definida 
                                               ou se a variável possuir o valor null será 
                                               utilizado o valor default --}}  
 @endisset
 
 {{-- Sintaxe switch --}}
-@isset($provider)    
-  Fornecedor: {{ $provider[1]['name'] }}
+@isset($providers)    
+  Fornecedor: {{ $providers[1]['name'] }}
   <br />
-  Status: {{ $provider[1]['status'] }}
+  Status: {{ $providers[1]['status'] }}
   <br />
-  CPNJ: {{ $provider[1]['cnpj'] ?? '' }}  
+  CPNJ: {{ $providers[1]['cnpj'] ?? '' }}  
   <br />
-  Telefone: ({{ $provider[1]['ddd'] ?? '' }}) {{ $provider[1]['telefone'] ?? '' }}  
-  @switch($provider[1]['ddd'])
+  Telefone: ({{ $providers[1]['ddd'] ?? '' }}) {{ $providers[1]['telefone'] ?? '' }}  
+  @switch($providers[1]['ddd'])
       @case('11')
           São Paulo (SP)
           @break
@@ -102,37 +102,96 @@ Status: {{ $provider[0]['status'] }}
   @endswitch
 @endisset
 
+<h3>For</h3>
 {{-- Sintaxe de contador for blade --}}
-@isset($provider)
-  @for ($i = 0; isset($provider[$i]); $i++)
-    Fornecedor: {{ $provider[$i]['name'] }}
+@isset($providers)
+  @for ($i = 0; isset($providers[$i]); $i++)
+    Fornecedor: {{ $providers[$i]['name'] }}
     <br />
-    Status: {{ $provider[$i]['status'] }}
+    Status: {{ $providers[$i]['status'] }}
     <br />
-    CPNJ: {{ $provider[$i]['cnpj'] ?? '' }}  
+    CPNJ: {{ $providers[$i]['cnpj'] ?? '' }}  
     <br />
-    Telefone: ({{ $provider[$i]['ddd'] ?? '' }}) {{ $provider[$i]['telefone'] ?? '' }}  
+    Telefone: ({{ $providers[$i]['ddd'] ?? '' }}) {{ $providers[$i]['telefone'] ?? '' }}  
     <hr />
   @endfor
 @endisset
 
-<br />
-<br />
-
+<h3>While</h3>
 {{-- Sintaxe while blade --}}
-@isset($provider)
+@isset($providers)
   @php $i = 0 @endphp
 
-  @while(isset($provider[$i]))
-    Fornecedor: {{ $provider[$i]['name'] }}
+  @while(isset($providers[$i]))
+    Fornecedor: {{ $providers[$i]['name'] }}
     <br />
-    Status: {{ $provider[$i]['status'] }}
+    Status: {{ $providers[$i]['status'] }}
     <br />
-    CPNJ: {{ $provider[$i]['cnpj'] ?? '' }}  
+    CPNJ: {{ $providers[$i]['cnpj'] ?? '' }}  
     <br />
-    Telefone: ({{ $provider[$i]['ddd'] ?? '' }}) {{ $provider[$i]['telefone'] ?? '' }}  
+    Telefone: ({{ $providers[$i]['ddd'] ?? '' }}) {{ $providers[$i]['telefone'] ?? '' }}  
     <hr />
     @php $i++ @endphp
   @endwhile
 @endisset
-    
+
+<h3>Foreach</h3>
+@isset($providers)
+    @foreach ($providers as $index => $provider )
+        Fornecedor: {{ $provider['name'] }}
+        <br />
+        Status: {{ $provider['status'] }}
+        <br />
+        CPNJ: {{ $provider['cnpj'] ?? '' }}  
+        <br />
+        Telefone: ({{ $provider['ddd'] ?? '' }}) {{ $provider['telefone'] ?? '' }}  
+        <hr />
+    @endforeach
+@endisset
+
+<h3>Forelse</h3>
+@isset($providers)
+    @forelse ($providers as $index => $provider )
+        Fornecedor: {{ $provider['name'] }}
+        <br />
+        Status: {{ $provider['status'] }}
+        <br />
+        CPNJ: {{ $provider['cnpj'] ?? '' }}  
+        <br />
+        Telefone: ({{ $provider['ddd'] ?? '' }}) {{ $provider['telefone'] ?? '' }}  
+        <hr />
+    @empty
+        Não existem fornecedores cadastrados
+    @endforelse
+@endisset
+
+Escapar tag de impressão do blade
+Fornecedores: @{{ $providers }} 
+
+<h3>Forelse variavel $loop</h3>
+@isset($providers)
+    @forelse ($providers as $index => $provider )
+        Iteração atual: {{ $loop->iteration }} 
+        <br>
+        Fornecedor: {{ $provider['name'] }}
+        <br />
+        Status: {{ $provider['status'] }}
+        <br />
+        CPNJ: {{ $provider['cnpj'] ?? '' }}  
+        <br />
+        Telefone: ({{ $provider['ddd'] ?? '' }}) {{ $provider['telefone'] ?? '' }}  
+        <br />
+        @if ($loop->first)
+            Primeira iteração do loop
+            <br>
+        @endif
+        @if ($loop->last)
+            Última iteração do loop
+            <br>
+            Total de registros: {{ $loop->count }}
+        @endif
+        <hr />
+    @empty
+        Não existem fornecedores cadastrados
+    @endforelse
+@endisset

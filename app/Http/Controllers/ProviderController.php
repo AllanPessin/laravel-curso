@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class ProviderController extends Controller
 {
     public function index() {
-      $provider = [
+      $providers = [
         0 => [
           'name' => 'Fornecedor 1', 
           'status' => 'n',
@@ -31,10 +31,12 @@ class ProviderController extends Controller
         ],
       ];
       
-      $msg = isset($provider[0]['cnpj']) ? 'CPNJ informado' : 'CPNJ não informado';
+      $msg = isset($providers[0]['cnpj']) ? 'CPNJ informado' : 'CPNJ não informado';
 
       echo $msg;
 
-      return view('app.provider.index', compact('provider'));
+      // $providers = [];
+
+      return view('app.provider.index', compact('providers'));
     }
 }
