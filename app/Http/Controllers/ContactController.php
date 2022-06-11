@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class ContactController extends Controller
 {
     public function contact() {
-      return view('site.contact');
+      $title = 'Contato';
+      return view('site.contact', compact('title'));
     }
 }
