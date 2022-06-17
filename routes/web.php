@@ -23,6 +23,7 @@ Route::get('/', [MainController::class, 'main'])->name('web.index');
 Route::get('/sobre-nos', [AboutController::class, 'about'])->name('web.about');
 
 Route::get('/contato', [ContactController::class, 'contact'])->name('web.contact');
+Route::post('/contato', [ContactController::class, 'contact'])->name('web.contact');
 
 Route::get('/login', function() { return 'Login';})->name('web.login');
 
